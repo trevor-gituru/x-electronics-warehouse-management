@@ -56,19 +56,19 @@ class TestStockBalanceReport(FrappeTestCase):
 		self.assertTrue(len(data) > 0)
 
 	def test_report_filters_by_item(self):
-		columns, data = execute({"item": self.item_code})
+		_, data = execute({"item": self.item_code})
 
 		self.assertGreater(len(data), 0)
 		self.assertTrue(all(row["item"] == self.item_code for row in data))
 
 	def test_report_filters_by_warehouse(self):
-		columns, data = execute({"warehouse": self.warehouse})
+		_, data = execute({"warehouse": self.warehouse})
 
 		self.assertGreater(len(data), 0)
 		self.assertTrue(all(row["warehouse"] == self.warehouse for row in data))
 
 	def test_report_shows_correct_balance(self):
-		columns, data = execute(
+		_, data = execute(
 			{
 				"item": self.item_code,
 				"warehouse": self.warehouse,
@@ -84,7 +84,7 @@ class TestStockBalanceReport(FrappeTestCase):
 		self.assertEqual(row["valuation_rate"], 100)
 
 	def test_report_as_on_date_excludes_future_entries(self):
-		columns, data = execute(
+		_, data = execute(
 			{
 				"item": self.item_code,
 				"warehouse": self.warehouse,

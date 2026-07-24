@@ -57,15 +57,15 @@ class TestStockLedgerReport(FrappeTestCase):
 		self.assertTrue(len(data) > 0)
 
 	def test_report_filters_by_item(self):
-		columns, data = execute({"item": self.item_code})
+		_, data = execute({"item": self.item_code})
 		self.assertTrue(all(row["item"] == self.item_code for row in data))
 
 	def test_report_filters_by_warehouse(self):
-		columns, data = execute({"warehouse": self.warehouse})
+		_, data = execute({"warehouse": self.warehouse})
 		self.assertTrue(all(row["warehouse"] == self.warehouse for row in data))
 
 	def test_report_shows_correct_values(self):
-		columns, data = execute({"item": self.item_code, "warehouse": self.warehouse})
+		_, data = execute({"item": self.item_code, "warehouse": self.warehouse})
 		row = data[0]
 		self.assertEqual(row["actual_qty"], 5)
 		self.assertEqual(row["valuation_rate"], 100)
@@ -74,7 +74,7 @@ class TestStockLedgerReport(FrappeTestCase):
 
 	def test_report_date_filter_excludes_old_entries(self):
 		# A from_date far in the future should return nothing
-		columns, data = execute(
+		_, data = execute(
 			{
 				"item": self.item_code,
 				"from_date": "2099-01-01",
