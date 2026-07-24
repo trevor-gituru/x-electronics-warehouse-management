@@ -5,11 +5,15 @@ on:
   push:
     branches:
       - develop
+      - main
   pull_request:
+    branches:
+      - develop
+      - main
   workflow_dispatch:
 
 concurrency:
-  group: develop-warehouse_management-${{ github.event.number }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
