@@ -1,16 +1,19 @@
 {
+ "actions": [],
+ "creation": "2026-07-24 14:22:22.553141",
  "doctype": "DocType",
- "name": "Stock Ledger Entry",
- "module": "Warehouse Management",
- "custom": 0,
- "istable": 0,
- "issingle": 0,
- "is_tree": 0,
- "is_submittable": 0,
- "track_changes": 0,
- "sort_field": "creation",
- "sort_order": "DESC",
  "engine": "InnoDB",
+ "field_order": [
+  "stock_movement_details",
+  "posting_date",
+  "item",
+  "warehouse",
+  "actual_qty",
+  "valuation_rate",
+  "stock_value",
+  "voucher_type",
+  "voucher_no"
+ ],
  "fields": [
   {
    "fieldname": "stock_movement_details",
@@ -19,81 +22,88 @@
   },
   {
    "fieldname": "posting_date",
-   "label": "Posting Date",
-   "fieldtype": "Datetime",
-   "reqd": 1,
+   "fieldtype": "Date",
    "in_list_view": 1,
    "in_standard_filter": 1,
+   "label": "Posting Date",
+   "reqd": 1,
    "search_index": 1
   },
   {
    "fieldname": "item",
-   "label": "Item",
    "fieldtype": "Link",
-   "options": "Item",
-   "reqd": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
+   "label": "Item",
+   "options": "Item",
+   "reqd": 1,
    "search_index": 1
   },
   {
    "fieldname": "warehouse",
-   "label": "Warehouse",
    "fieldtype": "Link",
-   "options": "Warehouse",
-   "reqd": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
+   "label": "Warehouse",
+   "options": "Warehouse",
+   "reqd": 1,
    "search_index": 1
   },
   {
+   "description": "Positive for receipts and inward transfers, negative for consumption or outward transfers.",
    "fieldname": "actual_qty",
-   "label": "Actual Quantity",
    "fieldtype": "Float",
-   "reqd": 1,
-   "description": "Positive for receipts and inward transfers, negative for consumption or outward transfers."
+   "label": "Actual Quantity",
+   "reqd": 1
   },
   {
+   "description": "Moving average rate at the time of this entry.",
    "fieldname": "valuation_rate",
-   "label": "Valuation Rate",
    "fieldtype": "Currency",
-   "reqd": 1,
+   "label": "Valuation Rate",
    "read_only": 1,
-   "description": "Moving average rate at the time of this entry."
+   "reqd": 1
   },
   {
+   "description": "actual_qty * valuation_rate for this line.",
    "fieldname": "stock_value",
-   "label": "Stock Value",
    "fieldtype": "Currency",
-   "reqd": 1,
+   "label": "Stock Value",
    "read_only": 1,
-   "description": "actual_qty * valuation_rate for this line."
+   "reqd": 1
   },
   {
    "fieldname": "voucher_type",
-   "label": "Voucher Type",
    "fieldtype": "Data",
-   "reqd": 1,
-   "read_only": 1
+   "label": "Voucher Type",
+   "read_only": 1,
+   "reqd": 1
   },
   {
    "fieldname": "voucher_no",
-   "label": "Voucher Number",
    "fieldtype": "Data",
-   "reqd": 1,
+   "label": "Voucher Number",
    "read_only": 1,
+   "reqd": 1,
    "search_index": 1
   }
  ],
+ "links": [],
+ "modified": "2026-07-24 17:10:13.995299",
+ "modified_by": "Administrator",
+ "module": "Warehouse Management",
+ "name": "Stock Ledger Entry",
+ "owner": "Administrator",
  "permissions": [
   {
-   "role": "System Manager",
+   "export": 1,
    "read": 1,
-   "write": 0,
-   "create": 0,
-   "delete": 0,
    "report": 1,
-   "export": 1
+   "role": "System Manager"
   }
- ]
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
 }
