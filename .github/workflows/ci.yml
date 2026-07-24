@@ -6,6 +6,7 @@ on:
     branches:
       - develop
   pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: develop-warehouse_management-${{ github.event.number }}
@@ -77,7 +78,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install MariaDB Client
-        run: sudo apt-get install mariadb-client-10.6
+        run: sudo apt-get install -y mariadb-client
 
       - name: Setup
         run: |
