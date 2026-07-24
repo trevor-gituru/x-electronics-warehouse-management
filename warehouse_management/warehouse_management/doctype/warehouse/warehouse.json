@@ -1,0 +1,81 @@
+{
+ "doctype": "DocType",
+ "name": "Warehouse",
+ "module": "Warehouse Management",
+ "custom": 0,
+ "istable": 0,
+ "issingle": 0,
+ "is_tree": 1,
+ "is_submittable": 0,
+ "autoname": "field:warehouse_name",
+ "nsm_parent_field": "parent_warehouse",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "warehouse_information",
+   "fieldtype": "Section Break",
+   "label": "Warehouse Information"
+  },
+  {
+   "fieldname": "warehouse_name",
+   "label": "Warehouse Name",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "parent_warehouse",
+   "label": "Parent Warehouse",
+   "fieldtype": "Link",
+   "options": "Warehouse",
+   "ignore_user_permissions": 1
+  },
+  {
+   "fieldname": "is_group",
+   "label": "Is Group",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "disabled",
+   "label": "Disabled",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "lft",
+   "label": "Left",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rgt",
+   "label": "Right",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "old_parent",
+   "label": "Old Parent",
+   "fieldtype": "Link",
+   "options": "Warehouse",
+   "hidden": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ]
+}

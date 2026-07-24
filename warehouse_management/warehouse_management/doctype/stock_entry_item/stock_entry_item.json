@@ -1,0 +1,59 @@
+{
+ "doctype": "DocType",
+ "name": "Stock Entry Item",
+ "module": "Warehouse Management",
+ "custom": 0,
+ "istable": 1,
+ "issingle": 0,
+ "is_tree": 0,
+ "is_submittable": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "item_details",
+   "fieldtype": "Section Break",
+   "label": "Item Details"
+  },
+  {
+   "fieldname": "item",
+   "label": "Item",
+   "fieldtype": "Link",
+   "options": "Item",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "qty",
+   "label": "Quantity",
+   "fieldtype": "Float",
+   "reqd": 1,
+   "in_list_view": 1,
+   "description": "Always entered as a positive number; direction is derived from the parent Stock Entry's Purpose."
+  },
+  {
+   "fieldname": "rate",
+   "label": "Rate",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "description": "Required for Receipt rows. For Consume/Transfer this is ignored on save — the controller fills stock value using the current moving average rate instead."
+  },
+  {
+   "fieldname": "source_warehouse",
+   "label": "Source Warehouse",
+   "fieldtype": "Link",
+   "options": "Warehouse",
+   "in_list_view": 1,
+   "description": "Required for Consume and Transfer."
+  },
+  {
+   "fieldname": "target_warehouse",
+   "label": "Target Warehouse",
+   "fieldtype": "Link",
+   "options": "Warehouse",
+   "in_list_view": 1,
+   "description": "Required for Receipt and Transfer."
+  }
+ ],
+ "permissions": []
+}

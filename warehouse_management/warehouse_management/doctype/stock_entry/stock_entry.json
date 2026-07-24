@@ -1,0 +1,81 @@
+{
+ "doctype": "DocType",
+ "name": "Stock Entry",
+ "module": "Warehouse Management",
+ "custom": 0,
+ "istable": 0,
+ "issingle": 0,
+ "is_tree": 0,
+ "is_submittable": 1,
+ "autoname": "naming_series:",
+ "naming_series": "STE-.YYYY.-.#####",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "stock_entry_details",
+   "fieldtype": "Section Break",
+   "label": "Stock Entry Details"
+  },
+  {
+   "fieldname": "naming_series",
+   "label": "Series",
+   "fieldtype": "Select",
+   "options": "STE-.YYYY.-.#####",
+   "hidden": 1
+  },
+  {
+   "fieldname": "purpose",
+   "label": "Purpose",
+   "fieldtype": "Select",
+   "options": "Receipt\nConsume\nTransfer",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "posting_date",
+   "label": "Posting Date",
+   "fieldtype": "Datetime",
+   "default": "Now",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "items",
+   "label": "Items",
+   "fieldtype": "Table",
+   "options": "Stock Entry Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "remarks",
+   "label": "Remarks",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "amended_from",
+   "label": "Amended From",
+   "fieldtype": "Link",
+   "options": "Stock Entry",
+   "no_copy": 1,
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1
+  }
+ ]
+}
