@@ -9,7 +9,7 @@ RUN bench init frappe-bench --frappe-branch version-15 --skip-redis-config-gener
 WORKDIR /home/frappe/frappe-bench
 
 # Pull your app straight from GitHub — replace with your actual repo URL
-RUN bench get-app https://github.com/trevor-gituru/warehouse_management.git
+RUN bench get-app https://github.com/trevor-gituru/x-electronics-warehouse-management.git
 
 COPY --chown=frappe:frappe docker/entrypoint.sh /home/frappe/entrypoint.sh
 USER root
