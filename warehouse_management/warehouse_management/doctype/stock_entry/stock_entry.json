@@ -10,7 +10,8 @@
   "purpose",
   "posting_date",
   "items",
-  "remarks"
+  "remarks",
+  "amended_from"
  ],
  "fields": [
   {
@@ -45,7 +46,7 @@
    "search_index": 1
   },
   {
-   "default": "Now",
+   "default": "now",
    "description": "Select the date the stock movement is recorded in the inventory.",
    "fieldname": "posting_date",
    "fieldtype": "Date",
@@ -69,11 +70,21 @@
    "fieldname": "remarks",
    "fieldtype": "Small Text",
    "label": "Remarks"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Stock Entry",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2026-07-28 12:27:24.376423",
+ "modified": "2026-07-28 15:45:08.639426",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Stock Entry",
