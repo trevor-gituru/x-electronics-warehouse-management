@@ -14,8 +14,7 @@ if [ ! -d "sites/$SITE_NAME" ]; then
     --db-port "$DB_PORT" \
     --db-root-username "$DB_USER" \
     --db-root-password "$DB_PASSWORD" \
-    --admin-password "$ADMIN_PASSWORD" \
-    --no-mariadb-socket
+    --admin-password "$ADMIN_PASSWORD"
 
   echo "Configuring Redis (Upstash)..."
   bench --site "$SITE_NAME" set-config redis_cache "$REDIS_CACHE_URL"
