@@ -46,7 +46,7 @@
    "search_index": 1
   },
   {
-   "default": "now",
+   "default": "Today",
    "description": "Select the date the stock movement is recorded in the inventory.",
    "fieldname": "posting_date",
    "fieldtype": "Date",
@@ -84,7 +84,7 @@
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2026-07-28 15:45:08.639426",
+ "modified": "2026-07-28 15:51:27.094801",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Stock Entry",
