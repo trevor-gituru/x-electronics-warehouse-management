@@ -2,6 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
+from frappe import _
 
 
 def execute(filters=None):
@@ -18,51 +19,51 @@ def get_columns():
 	"""Define the columns displayed in the Stock Ledger report."""
 	return [
 		{
-			"label": "Date",
+			"label": _("Date"),
 			"fieldname": "posting_date",
 			"fieldtype": "Datetime",
 			"width": 160,
 		},
 		{
-			"label": "Item",
+			"label": _("Item"),
 			"fieldname": "item",
 			"fieldtype": "Link",
 			"options": "Item",
 			"width": 120,
 		},
 		{
-			"label": "Warehouse",
+			"label": _("Warehouse"),
 			"fieldname": "warehouse",
 			"fieldtype": "Link",
 			"options": "Warehouse",
 			"width": 120,
 		},
 		{
-			"label": "Qty Change",
+			"label": _("Qty Change"),
 			"fieldname": "actual_qty",
 			"fieldtype": "Float",
 			"width": 100,
 		},
 		{
-			"label": "Valuation Rate",
+			"label": _("Valuation Rate"),
 			"fieldname": "valuation_rate",
 			"fieldtype": "Currency",
 			"width": 120,
 		},
 		{
-			"label": "Stock Value Change",
+			"label": _("Stock Value Change"),
 			"fieldname": "stock_value",
 			"fieldtype": "Currency",
 			"width": 140,
 		},
 		{
-			"label": "Voucher Type",
+			"label": _("Voucher Type"),
 			"fieldname": "voucher_type",
 			"fieldtype": "Data",
 			"width": 100,
 		},
 		{
-			"label": "Voucher No",
+			"label": _("Voucher No"),
 			"fieldname": "voucher_no",
 			"fieldtype": "Dynamic Link",
 			"options": "voucher_type",
@@ -73,10 +74,10 @@ def get_columns():
 
 def get_data(filters):
 	"""Retrieve Stock Ledger entries that match the selected filters."""
-	# Build SQL conditions from the selected report filters.
 	conditions, values = get_conditions(filters)
 
-	query = f"""
+	query = (
+		"""
 		SELECT
 			posting_date,
 			item,
@@ -87,35 +88,33 @@ def get_data(filters):
 			voucher_type,
 			voucher_no
 		FROM `tabStock Ledger Entry`
-		WHERE {conditions}
+		WHERE """
+		+ conditions
+		+ """
 		ORDER BY posting_date ASC, creation ASC
 	"""
+	)
 
-	return frappe.db.sql(query, values, as_dict=True)
+	return frappe.db.sql(query, values=values, as_dict=True)
 
 
 def get_conditions(filters):
 	"""Build SQL WHERE conditions from the selected report filters."""
-	# Start with a condition that always evaluates to true.
 	conditions = ["1=1"]
 	values = {}
 
-	# Optionally filter by item.
 	if filters.get("item"):
 		conditions.append("item = %(item)s")
 		values["item"] = filters["item"]
 
-	# Optionally filter by warehouse.
 	if filters.get("warehouse"):
 		conditions.append("warehouse = %(warehouse)s")
 		values["warehouse"] = filters["warehouse"]
 
-	# Optionally filter by the start date.
 	if filters.get("from_date"):
 		conditions.append("posting_date >= %(from_date)s")
 		values["from_date"] = filters["from_date"]
 
-	# Optionally filter by the end date.
 	if filters.get("to_date"):
 		conditions.append("posting_date <= %(to_date)s")
 		values["to_date"] = filters["to_date"]

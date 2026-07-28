@@ -2,6 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
+from frappe import _
 from frappe.utils import nowdate
 
 
@@ -19,33 +20,33 @@ def get_columns():
 	"""Define the columns displayed in the Stock Balance report."""
 	return [
 		{
-			"label": "Item",
+			"label": _("Item"),
 			"fieldname": "item",
 			"fieldtype": "Link",
 			"options": "Item",
 			"width": 150,
 		},
 		{
-			"label": "Warehouse",
+			"label": _("Warehouse"),
 			"fieldname": "warehouse",
 			"fieldtype": "Link",
 			"options": "Warehouse",
 			"width": 150,
 		},
 		{
-			"label": "Balance Qty",
+			"label": _("Balance Qty"),
 			"fieldname": "balance_qty",
 			"fieldtype": "Float",
 			"width": 120,
 		},
 		{
-			"label": "Valuation Rate",
+			"label": _("Valuation Rate"),
 			"fieldname": "valuation_rate",
 			"fieldtype": "Currency",
 			"width": 130,
 		},
 		{
-			"label": "Balance Value",
+			"label": _("Balance Value"),
 			"fieldname": "balance_value",
 			"fieldtype": "Currency",
 			"width": 140,
@@ -61,20 +62,24 @@ def get_data(filters):
 	# Build SQL conditions based on the selected filters.
 	conditions, values = get_conditions(filters, as_on_date)
 
-	query = f"""
+	query = (
+		"""
 		SELECT
 			item,
 			warehouse,
 			SUM(actual_qty) AS balance_qty,
 			SUM(stock_value) AS balance_value
 		FROM `tabStock Ledger Entry`
-		WHERE {conditions}
+		WHERE """
+		+ conditions
+		+ """
 		GROUP BY item, warehouse
 		HAVING SUM(actual_qty) != 0
 		ORDER BY item, warehouse
 	"""
+	)
 
-	rows = frappe.db.sql(query, values, as_dict=True)
+	rows = frappe.db.sql(query, values=values, as_dict=True)
 
 	# Calculate the moving average valuation rate for each stock balance.
 	for row in rows:
