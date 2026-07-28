@@ -46,7 +46,8 @@ jobs:
       - name: Determine tags
         id: tags
         run: |
-          TAGS="${{ steps.prep.outputs.image_name }}:${{ github.ref_name }}"
+          SAFE_REF=$(echo "${{ github.ref_name }}" | tr '/' '-')
+          TAGS="${{ steps.prep.outputs.image_name }}:$SAFE_REF"
           TAGS="$TAGS,${{ steps.prep.outputs.image_name }}:${{ github.sha }}"
           if [ "${{ github.ref_name }}" = "main" ]; then
             TAGS="$TAGS,${{ steps.prep.outputs.image_name }}:latest"
