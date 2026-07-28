@@ -107,3 +107,23 @@ Stock Entry Item
  | submit
  ↓
 Stock Ledger Entry
+
+---
+
+## Reports
+
+### Stock Balance Report
+
+Displays the current inventory balance for each item and warehouse by summarizing Stock Ledger Entries up to a selected date.
+
+Supports:
+
+- Stock quantity balances.
+- Inventory valuation.
+- Filtering by item.
+- Filtering by warehouse.
+- Historical "As On Date" reporting.
+
+Documentation:
+
+[Stock Balance Report](stock_balance.md)
