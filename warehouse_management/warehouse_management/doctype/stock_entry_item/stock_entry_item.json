@@ -1,59 +1,85 @@
 {
+ "actions": [],
+ "creation": "2026-07-24 14:25:28.825807",
  "doctype": "DocType",
- "name": "Stock Entry Item",
- "module": "Warehouse Management",
- "custom": 0,
- "istable": 1,
- "issingle": 0,
- "is_tree": 0,
- "is_submittable": 0,
  "editable_grid": 1,
  "engine": "InnoDB",
+ "field_order": [
+  "item_details",
+  "item",
+  "qty",
+  "rate",
+  "source_warehouse",
+  "target_warehouse"
+ ],
  "fields": [
   {
+   "description": "Provides the details of each item included in this stock movement.",
    "fieldname": "item_details",
    "fieldtype": "Section Break",
    "label": "Item Details"
   },
   {
+   "description": "Select the item involved in this stock movement.",
+   "documentation_url": "https://github.com/trevor-gituru/x-electronics-warehouse-management/tree/main/docs/stock_entry_item.md",
    "fieldname": "item",
-   "label": "Item",
    "fieldtype": "Link",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Item",
    "options": "Item",
    "reqd": 1,
-   "in_list_view": 1
+   "search_index": 1
   },
   {
+   "description": "Enter the quantity of the item involved in this stock movement.",
    "fieldname": "qty",
-   "label": "Quantity",
    "fieldtype": "Float",
-   "reqd": 1,
    "in_list_view": 1,
-   "description": "Always entered as a positive number; direction is derived from the parent Stock Entry's Purpose."
+   "in_preview": 1,
+   "label": "Quantity",
+   "placeholder": "e.g. 10",
+   "reqd": 1
   },
   {
+   "description": "Specify the valuation rate per unit used to calculate the item's inventory value. Required for receipt transactions.",
    "fieldname": "rate",
-   "label": "Rate",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "description": "Required for Receipt rows. For Consume/Transfer this is ignored on save — the controller fills stock value using the current moving average rate instead."
+   "in_preview": 1,
+   "label": "Rate",
+   "placeholder": "e.g. 250.00"
   },
   {
+   "description": "Select the warehouse from which the item will be consumed or transferred. Required for Consume and Transfer transactions.",
    "fieldname": "source_warehouse",
-   "label": "Source Warehouse",
    "fieldtype": "Link",
-   "options": "Warehouse",
    "in_list_view": 1,
-   "description": "Required for Consume and Transfer."
+   "label": "Source Warehouse",
+   "options": "Warehouse"
   },
   {
+   "description": "Select the warehouse to which the item will be received or transferred. Required for Receipt and Transfer transactions.",
    "fieldname": "target_warehouse",
-   "label": "Target Warehouse",
    "fieldtype": "Link",
-   "options": "Warehouse",
    "in_list_view": 1,
-   "description": "Required for Receipt and Transfer."
+   "label": "Target Warehouse",
+   "options": "Warehouse"
   }
  ],
- "permissions": []
+ "istable": 1,
+ "links": [],
+ "modified": "2026-07-28 12:52:01.015100",
+ "modified_by": "Administrator",
+ "module": "Warehouse Management",
+ "name": "Stock Entry Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
 }
