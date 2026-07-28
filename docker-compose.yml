@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    environment:
+      SITE_NAME: x-electronics.local
+
+      DB_HOST: ${SUPABASE_DB_HOST}
+      DB_PORT: ${SUPABASE_DB_PORT:-5432}
+      DB_USER: ${SUPABASE_DB_USER}
+      DB_PASSWORD: ${SUPABASE_DB_PASSWORD}
+      DB_NAME: ${SUPABASE_DB_NAME:-postgres}
+      PGSSLMODE: require
+
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin}
+
+      REDIS_CACHE_URL: ${UPSTASH_REDIS_CACHE_URL}
+      REDIS_QUEUE_URL: ${UPSTASH_REDIS_QUEUE_URL}
+    ports:
+      - "8000:8000"
+    volumes:
+      - sites-data:/home/frappe/frappe-bench/sites
+
+volumes:
+  sites-data:
