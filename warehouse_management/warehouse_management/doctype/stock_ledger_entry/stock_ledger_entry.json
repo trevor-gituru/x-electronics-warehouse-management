@@ -1,7 +1,9 @@
 {
  "actions": [],
- "creation": "2026-07-24 14:22:22.553141",
+ "creation": "2026-07-28 11:35:27.286728",
+ "description": "Stores the history of inventory movements, including item quantities, valuation, warehouses, and the transactions that created them.",
  "doctype": "DocType",
+ "documentation": "https://github.com/trevor-gituru/x-electronics-warehouse-management/tree/main/docs/stock_ledger_entry.md",
  "engine": "InnoDB",
  "field_order": [
   "stock_movement_details",
@@ -16,23 +18,32 @@
  ],
  "fields": [
   {
+   "description": "Provides the details of each inventory movement recorded in the stock ledger.",
    "fieldname": "stock_movement_details",
    "fieldtype": "Section Break",
    "label": "Stock Movement Details"
   },
   {
+   "description": "The date on which the inventory movement was recorded.",
+   "documentation_url": "https://github.com/trevor-gituru/x-electronics-warehouse-management/tree/main/docs/stock_ledger_entry.md",
    "fieldname": "posting_date",
    "fieldtype": "Date",
+   "in_filter": 1,
    "in_list_view": 1,
+   "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Posting Date",
    "reqd": 1,
    "search_index": 1
   },
   {
+   "description": "Select the inventory item involved in this stock movement.",
    "fieldname": "item",
    "fieldtype": "Link",
+   "in_filter": 1,
+   "in_global_search": 1,
    "in_list_view": 1,
+   "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Item",
    "options": "Item",
@@ -40,9 +51,13 @@
    "search_index": 1
   },
   {
+   "description": "Select the warehouse where the inventory movement occurred.",
    "fieldname": "warehouse",
    "fieldtype": "Link",
+   "in_filter": 1,
+   "in_global_search": 1,
    "in_list_view": 1,
+   "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Warehouse",
    "options": "Warehouse",
@@ -50,49 +65,59 @@
    "search_index": 1
   },
   {
-   "description": "Positive for receipts and inward transfers, negative for consumption or outward transfers.",
+   "description": "The quantity added to or removed from the warehouse. Positive values increase stock, while negative values decrease stock.",
    "fieldname": "actual_qty",
    "fieldtype": "Float",
+   "in_list_view": 1,
+   "in_preview": 1,
    "label": "Actual Quantity",
    "reqd": 1
   },
   {
-   "description": "Moving average rate at the time of this entry.",
+   "description": "The valuation rate per unit used to calculate the inventory value for this movement.",
    "fieldname": "valuation_rate",
    "fieldtype": "Currency",
    "label": "Valuation Rate",
+   "placeholder": "eg 10",
    "read_only": 1,
    "reqd": 1
   },
   {
-   "description": "actual_qty * valuation_rate for this line.",
+   "description": "The total inventory value of this movement, calculated from the quantity and valuation rate.",
    "fieldname": "stock_value",
    "fieldtype": "Currency",
+   "in_list_view": 1,
+   "in_preview": 1,
    "label": "Stock Value",
    "read_only": 1,
    "reqd": 1
   },
   {
+   "default": "Stock Entry",
+   "description": "The type of document that generated this stock movement, such as a Stock Entry.",
    "fieldname": "voucher_type",
-   "fieldtype": "Data",
+   "fieldtype": "Select",
    "label": "Voucher Type",
+   "options": "Stock Entry",
    "read_only": 1,
    "reqd": 1
   },
   {
+   "description": "The reference number of the document that generated this stock movement.",
    "fieldname": "voucher_no",
    "fieldtype": "Data",
    "label": "Voucher Number",
+   "placeholder": "eg STE-2026-00003",
    "read_only": 1,
-   "reqd": 1,
-   "search_index": 1
+   "reqd": 1
   }
  ],
  "links": [],
- "modified": "2026-07-24 17:10:13.995299",
+ "modified": "2026-07-28 13:19:32.702984",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Stock Ledger Entry",
+ "naming_rule": "By script",
  "owner": "Administrator",
  "permissions": [
   {
