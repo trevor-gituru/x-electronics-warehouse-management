@@ -12,8 +12,11 @@ if [ ! -d "sites/$SITE_NAME" ]; then
     --db-type postgres \
     --db-host "$DB_HOST" \
     --db-port "$DB_PORT" \
+    --db-name "$DB_NAME" \
+    --db-password "$DB_PASSWORD" \
     --db-root-username "$DB_USER" \
     --db-root-password "$DB_PASSWORD" \
+    --no-setup-db \
     --admin-password "$ADMIN_PASSWORD"
 
   echo "Configuring Redis (Upstash)..."
