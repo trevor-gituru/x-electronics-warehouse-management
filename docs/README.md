@@ -112,18 +112,36 @@ Stock Ledger Entry
 
 ## Reports
 
-### Stock Balance Report
+The Warehouse Management application includes inventory reporting features for monitoring stock movements and inventory balances.
 
-Displays the current inventory balance for each item and warehouse by summarizing Stock Ledger Entries up to a selected date.
+### Stock Ledger Report
 
-Supports:
+Provides a chronological record of all inventory transactions.
 
-- Stock quantity balances.
-- Inventory valuation.
-- Filtering by item.
-- Filtering by warehouse.
-- Historical "As On Date" reporting.
+Features:
+
+- View stock movement history.
+- Filter by item, warehouse, and date range.
+- Display quantity and stock value changes.
+- Trace inventory transactions back to their source documents.
 
 Documentation:
 
-[Stock Balance Report](stock_balance.md)
+[Stock Ledger Report](stock_ledger_report.md)
+
+---
+
+### Stock Balance Report
+
+Provides the current inventory balance for each item and warehouse as of a selected date.
+
+Features:
+
+- Calculate available stock quantities.
+- Display inventory valuation.
+- Filter by item, warehouse, and reporting date.
+- Summarize stock balances using Stock Ledger Entries.
+
+Documentation:
+
+[Stock Balance Report](stock_balance_report.md)
