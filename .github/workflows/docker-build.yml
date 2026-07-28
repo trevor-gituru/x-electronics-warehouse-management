@@ -1,0 +1,58 @@
+name: Docker Build
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create .env file from GitHub secrets
+        run: |
+          cat <<EOF > .env
+          SUPABASE_DB_HOST=${{ secrets.SUPABASE_DB_HOST }}
+          SUPABASE_DB_PORT=${{ secrets.SUPABASE_DB_PORT }}
+          SUPABASE_DB_USER=${{ secrets.SUPABASE_DB_USER }}
+          SUPABASE_DB_PASSWORD=${{ secrets.SUPABASE_DB_PASSWORD }}
+          SUPABASE_DB_NAME=${{ secrets.SUPABASE_DB_NAME }}
+          ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
+          UPSTASH_REDIS_CACHE_URL=${{ secrets.UPSTASH_REDIS_CACHE_URL }}
+          UPSTASH_REDIS_QUEUE_URL=${{ secrets.UPSTASH_REDIS_QUEUE_URL }}
+          EOF
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: docker/Dockerfile
+          push: false
+          load: true
+          tags: warehouse-management:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Verify image was built
+        run: docker images warehouse-management:latest
