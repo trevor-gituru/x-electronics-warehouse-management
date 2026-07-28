@@ -1,81 +1,113 @@
 {
- "doctype": "DocType",
- "name": "Warehouse",
- "module": "Warehouse Management",
- "custom": 0,
- "istable": 0,
- "issingle": 0,
- "is_tree": 1,
- "is_submittable": 0,
+ "actions": [],
  "autoname": "field:warehouse_name",
- "nsm_parent_field": "parent_warehouse",
- "sort_field": "modified",
- "sort_order": "DESC",
+ "creation": "2026-07-24 14:19:39.565186",
+ "doctype": "DocType",
  "engine": "InnoDB",
+ "field_order": [
+  "warehouse_information",
+  "warehouse_name",
+  "parent_warehouse",
+  "is_group",
+  "disabled",
+  "lft",
+  "rgt",
+  "old_parent"
+ ],
  "fields": [
   {
+   "description": "Basic information used to identify and organize the warehouse.",
    "fieldname": "warehouse_information",
    "fieldtype": "Section Break",
    "label": "Warehouse Information"
   },
   {
+   "description": "Enter a unique, descriptive name for the warehouse.",
+   "documentation_url": "https://github.com/trevor-gituru/x-electronics-warehouse-management/tree/main/docs/warehouse.md",
    "fieldname": "warehouse_name",
-   "label": "Warehouse Name",
    "fieldtype": "Data",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Warehouse Name",
+   "placeholder": "e.g. Main Warehouse",
    "reqd": 1,
-   "unique": 1,
-   "in_list_view": 1
+   "unique": 1
   },
   {
+   "description": "Select the parent warehouse to organize this warehouse within the warehouse hierarchy. Leave blank if this is a top-level warehouse",
    "fieldname": "parent_warehouse",
-   "label": "Parent Warehouse",
    "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "in_filter": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Parent Warehouse",
    "options": "Warehouse",
-   "ignore_user_permissions": 1
+   "search_index": 1
   },
   {
+   "default": "0",
+   "description": "Indicates whether this warehouse is used to organize child warehouses instead of storing inventory.",
    "fieldname": "is_group",
-   "label": "Is Group",
    "fieldtype": "Check",
-   "default": "0"
+   "in_list_view": 1,
+   "label": "Is Group"
   },
   {
+   "default": "0",
+   "description": "Disable this warehouse to prevent it from being used in new stock transactions while preserving historical records.",
    "fieldname": "disabled",
-   "label": "Disabled",
    "fieldtype": "Check",
-   "default": "0"
+   "in_list_view": 1,
+   "label": "Disabled"
   },
   {
    "fieldname": "lft",
-   "label": "Left",
    "fieldtype": "Int",
    "hidden": 1,
+   "label": "Left",
    "no_copy": 1,
    "read_only": 1
   },
   {
    "fieldname": "rgt",
-   "label": "Right",
    "fieldtype": "Int",
    "hidden": 1,
+   "label": "Right",
    "no_copy": 1,
    "read_only": 1
   },
   {
    "fieldname": "old_parent",
-   "label": "Old Parent",
    "fieldtype": "Link",
-   "options": "Warehouse",
-   "hidden": 1
+   "hidden": 1,
+   "label": "Old Parent",
+   "options": "Warehouse"
   }
  ],
+ "is_tree": 1,
+ "links": [],
+ "modified": "2026-07-28 11:39:32.711142",
+ "modified_by": "Administrator",
+ "module": "Warehouse Management",
+ "name": "Warehouse",
+ "naming_rule": "By fieldname",
+ "nsm_parent_field": "parent_warehouse",
+ "owner": "Administrator",
  "permissions": [
   {
-   "role": "System Manager",
-   "read": 1,
-   "write": 1,
    "create": 1,
-   "delete": 1
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
   }
- ]
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
 }
