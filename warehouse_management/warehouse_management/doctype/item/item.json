@@ -1,57 +1,94 @@
 {
- "doctype": "DocType",
- "name": "Item",
- "module": "Warehouse Management",
- "custom": 0,
- "istable": 0,
- "issingle": 0,
- "is_tree": 0,
- "is_submittable": 0,
+ "actions": [],
  "autoname": "field:item_code",
- "sort_field": "modified",
- "sort_order": "DESC",
+ "creation": "2026-07-24 14:16:57.896259",
+ "doctype": "DocType",
  "engine": "InnoDB",
+ "field_order": [
+  "item_information",
+  "item_code",
+  "item_name",
+  "description",
+  "uom",
+  "disabled"
+ ],
  "fields": [
   {
+   "allow_in_quick_entry": 1,
+   "description": "Enter a unique identifier for the item.",
+   "documentation_url": "https://github.com/trevor-gituru/x-electronics-warehouse-management/tree/main/docs/item.md",
    "fieldname": "item_code",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Item Code",
-   "fieldtype": "Data",
+   "placeholder": "e.g. LAP001",
    "reqd": 1,
-   "unique": 1,
-   "in_list_view": 1
+   "unique": 1
   },
   {
+   "allow_in_quick_entry": 1,
+   "description": "Enter a descriptive name for the item.",
    "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Item Name",
-   "fieldtype": "Data",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "description",
-   "label": "Description",
-   "fieldtype": "Small Text"
-  },
-  {
-   "fieldname": "uom",
-   "label": "Unit of Measurement",
-   "fieldtype": "Data",
+   "placeholder": "e.g. Dell Latitude 7420",
    "reqd": 1
   },
   {
+   "description": "Provide additional information about the item.",
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "description": "Select the unit of measure used to manage this item.",
+   "fieldname": "uom",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Unit of Measurement",
+   "placeholder": "e.g. Nos",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "description": "Prevent this item from being used in new stock transactions while retaining historical records.",
    "fieldname": "disabled",
-   "label": "Disabled",
    "fieldtype": "Check",
-   "default": "0"
+   "label": "Disabled"
+  },
+  {
+   "description": "Basic information used to identify and manage the item.",
+   "fieldname": "item_information",
+   "fieldtype": "Section Break",
+   "label": "Item Information"
   }
  ],
+ "links": [],
+ "modified": "2026-07-28 12:06:39.757291",
+ "modified_by": "Administrator",
+ "module": "Warehouse Management",
+ "name": "Item",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
  "permissions": [
   {
-   "role": "System Manager",
-   "read": 1,
-   "write": 1,
    "create": 1,
-   "delete": 1
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
   }
- ]
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
 }
