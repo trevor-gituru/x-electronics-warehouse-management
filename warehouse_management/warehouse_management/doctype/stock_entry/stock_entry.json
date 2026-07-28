@@ -1,81 +1,111 @@
 {
- "doctype": "DocType",
- "name": "Stock Entry",
- "module": "Warehouse Management",
- "custom": 0,
- "istable": 0,
- "issingle": 0,
- "is_tree": 0,
- "is_submittable": 1,
+ "actions": [],
  "autoname": "naming_series:",
- "naming_series": "STE-.YYYY.-.#####",
- "sort_field": "modified",
- "sort_order": "DESC",
+ "creation": "2026-07-24 14:26:55.123268",
+ "doctype": "DocType",
  "engine": "InnoDB",
+ "field_order": [
+  "stock_entry_details",
+  "naming_series",
+  "purpose",
+  "posting_date",
+  "items",
+  "remarks",
+  "amended_from"
+ ],
  "fields": [
   {
+   "description": "Contains the details of the stock movement, including the items, quantities, and warehouses involved.",
    "fieldname": "stock_entry_details",
    "fieldtype": "Section Break",
    "label": "Stock Entry Details"
   },
   {
+   "default": "STE-.YYYY.-.#####",
+   "description": "Select the naming series used to automatically generate a unique identifier for this stock entry.",
    "fieldname": "naming_series",
-   "label": "Series",
    "fieldtype": "Select",
-   "options": "STE-.YYYY.-.#####",
-   "hidden": 1
+   "hidden": 1,
+   "label": "Series",
+   "options": "STE-.YYYY.-.#####"
   },
   {
+   "default": "Receipt",
+   "description": "Select the type of stock movement this entry records, such as a receipt, consumption, or transfer.",
+   "documentation_url": "https://github.com/trevor-gituru/x-electronics-warehouse-management/tree/main/docs/stock_entry.md",
    "fieldname": "purpose",
-   "label": "Purpose",
    "fieldtype": "Select",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Purpose",
    "options": "Receipt\nConsume\nTransfer",
    "reqd": 1,
-   "in_list_view": 1
+   "search_index": 1
   },
   {
+   "default": "Today",
+   "description": "Select the date the stock movement is recorded in the inventory.",
    "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Posting Date",
-   "fieldtype": "Datetime",
-   "default": "Now",
-   "reqd": 1,
-   "in_list_view": 1
+   "reqd": 1
   },
   {
+   "description": "Add the items included in this stock movement, along with their quantities, rates, and source or target warehouses.",
    "fieldname": "items",
-   "label": "Items",
    "fieldtype": "Table",
+   "label": "Items",
    "options": "Stock Entry Item",
    "reqd": 1
   },
   {
+   "description": "Provide any additional information or context about this stock movement, if necessary.",
    "fieldname": "remarks",
-   "label": "Remarks",
-   "fieldtype": "Small Text"
+   "fieldtype": "Small Text",
+   "label": "Remarks"
   },
   {
    "fieldname": "amended_from",
-   "label": "Amended From",
    "fieldtype": "Link",
-   "options": "Stock Entry",
+   "label": "Amended From",
    "no_copy": 1,
+   "options": "Stock Entry",
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
   }
  ],
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-07-28 15:51:27.094801",
+ "modified_by": "Administrator",
+ "module": "Warehouse Management",
+ "name": "Stock Entry",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
  "permissions": [
   {
-   "role": "System Manager",
-   "read": 1,
-   "write": 1,
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
-   "submit": 1,
-   "cancel": 1,
-   "amend": 1,
+   "export": 1,
+   "read": 1,
    "report": 1,
-   "export": 1
+   "role": "System Manager",
+   "submit": 1,
+   "write": 1
   }
- ]
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
 }

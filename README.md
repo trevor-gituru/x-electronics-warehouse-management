@@ -12,6 +12,13 @@ bench get-app $URL_OF_THIS_REPO --branch develop
 bench install-app warehouse_management
 ```
 
+### Documentation
+
+Detailed documentation for the application's DocTypes and inventory workflows is available in:
+
+[Warehouse Management Documentation](docs/README.md)
+
+
 ### Contributing
 
 This app uses `pre-commit` for code formatting and linting. Please [install pre-commit](https://pre-commit.com/#installation) and enable it for this repository:
