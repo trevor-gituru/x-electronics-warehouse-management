@@ -1,0 +1,147 @@
+# Warehouse Management Documentation
+
+This directory contains documentation for the Warehouse Management application, including DocTypes, inventory workflows, and system behavior.
+
+## Overview
+
+The Warehouse Management system provides functionality for managing:
+
+- Items and item information.
+- Warehouse locations and hierarchy.
+- Stock movements through receipts, consumption, and transfers.
+- Inventory history and valuation tracking.
+
+## DocTypes
+
+### Item
+
+Represents products managed within the inventory system.
+
+Documentation:
+
+[Item DocType](item.md)
+
+---
+
+### Warehouse
+
+Represents physical or logical storage locations where inventory is managed.
+
+Supports:
+
+- Warehouse hierarchy.
+- Parent-child warehouse relationships.
+- Group warehouses for organization.
+
+Documentation:
+
+[Warehouse DocType](warehouse.md)
+
+---
+
+### Stock Entry
+
+Records inventory transactions such as:
+
+- Receipt of stock.
+- Consumption of stock.
+- Transfer between warehouses.
+
+A submitted Stock Entry creates corresponding Stock Ledger Entries.
+
+Documentation:
+
+[Stock Entry DocType](stock_entry.md)
+
+---
+
+### Stock Entry Item
+
+Represents individual item rows within a Stock Entry.
+
+Stores:
+
+- Item.
+- Quantity.
+- Rate.
+- Source warehouse.
+- Target warehouse.
+
+Documentation:
+
+[Stock Entry Item DocType](stock_entry_item.md)
+
+---
+
+### Stock Ledger Entry
+
+Stores the historical record of inventory movements.
+
+Tracks:
+
+- Quantity changes.
+- Inventory valuation.
+- Warehouse movements.
+- Source transaction references.
+
+Documentation:
+
+[Stock Ledger Entry DocType](stock_ledger_entry.md)
+
+---
+
+## Inventory Flow
+
+The general inventory process is:
+
+```text
+Item
+ |
+ |
+Stock Entry
+ |
+ | contains
+ ↓
+Stock Entry Item
+ |
+ | submit
+ ↓
+Stock Ledger Entry
+
+---
+
+## Reports
+
+The Warehouse Management application includes inventory reporting features for monitoring stock movements and inventory balances.
+
+### Stock Ledger Report
+
+Provides a chronological record of all inventory transactions.
+
+Features:
+
+- View stock movement history.
+- Filter by item, warehouse, and date range.
+- Display quantity and stock value changes.
+- Trace inventory transactions back to their source documents.
+
+Documentation:
+
+[Stock Ledger Report](stock_ledger_report.md)
+
+---
+
+### Stock Balance Report
+
+Provides the current inventory balance for each item and warehouse as of a selected date.
+
+Features:
+
+- Calculate available stock quantities.
+- Display inventory valuation.
+- Filter by item, warehouse, and reporting date.
+- Summarize stock balances using Stock Ledger Entries.
+
+Documentation:
+
+[Stock Balance Report](stock_balance_report.md)
