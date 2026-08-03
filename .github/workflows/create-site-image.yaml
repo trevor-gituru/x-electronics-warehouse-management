@@ -2,14 +2,23 @@ name: Create Site Image
 
 on:
   workflow_dispatch:
+    inputs:
+      image_tag:
+        description: "Application image tag"
+        required: true
+        default: latest
+        type: choice
+        options:
+          - latest
+          - latest-test
 
 permissions:
   contents: read
   packages: write
 
 env:
-  APP_IMAGE: ghcr.io/trevor-gituru/x-electronics-warehouse-management:latest
-  SITE_IMAGE: ghcr.io/trevor-gituru/x-electronics-warehouse-management:latest
+  APP_IMAGE: ghcr.io/trevor-gituru/x-electronics-warehouse-management:${{ inputs.image_tag }}
+  SITE_IMAGE: ghcr.io/trevor-gituru/x-electronics-warehouse-management:${{ inputs.image_tag }}
 
 jobs:
   create-site-image:

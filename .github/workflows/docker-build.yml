@@ -51,6 +51,8 @@ jobs:
           TAGS="$TAGS,${{ steps.prep.outputs.image_name }}:${{ github.sha }}"
           if [ "${{ github.ref_name }}" = "main" ]; then
             TAGS="$TAGS,${{ steps.prep.outputs.image_name }}:latest"
+          else
+            TAGS="$TAGS,${{ steps.prep.outputs.image_name }}:latest-test"
           fi
           echo "tags=$TAGS" >> "$GITHUB_OUTPUT"
 
