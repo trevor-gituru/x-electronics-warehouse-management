@@ -57,21 +57,22 @@ jobs:
 
       - name: Wait for site creation and Frappe startup
         run: |
-          timeout 10m bash -c '
-            docker logs -f site-builder 2>&1 | tee /tmp/site-builder.log &
-            LOG_PID=$!
+          docker logs -f site-builder 2>&1 | tee /tmp/site-builder.log &
+          LOG_PID=$!
 
+          timeout 10m bash -c '
             until \
               grep -q "^Starting Frappe...$" /tmp/site-builder.log &&
               docker exec site-builder test -d /home/frappe/frappe-bench/sites/x-electronics.local
             do
               sleep 2
             done
+          '
 
-            kill $LOG_PID || true
-            wait $LOG_PID 2>/dev/null || true
+          kill $LOG_PID || true
+          wait $LOG_PID 2>/dev/null || true
 
-            echo "Site created and Frappe started."
+          echo "Site created and Frappe started."
 
       - name: Stop container
         run: docker stop site-builder
