@@ -1,0 +1,75 @@
+name: Create Site Image
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  APP_IMAGE: ghcr.io/trevor-gituru/warehouse-management:latest
+  SITE_IMAGE: ghcr.io/trevor-gituru/warehouse-management-site:latest
+
+jobs:
+  create-site-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull application image
+        run: docker pull $APP_IMAGE
+
+      - name: Create Docker volume
+        run: docker volume create frappe-sites
+
+      - name: Start container
+        run: |
+          docker run -d \
+            --name site-builder \
+            --restart=no \
+            -v frappe-sites:/home/frappe/frappe-bench/sites \
+            -e SITE_NAME=x-electronics.local \
+            -e DB_HOST="${{ secrets.DB_HOST }}" \
+            -e DB_PORT="${{ secrets.DB_PORT }}" \
+            -e DB_NAME="${{ secrets.DB_NAME }}" \
+            -e DB_USER="${{ secrets.DB_USER }}" \
+            -e DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
+            -e ADMIN_PASSWORD="${{ secrets.ADMIN_PASSWORD }}" \
+            -e REDIS_CACHE_URL="${{ secrets.UPSTASH_REDIS_CACHE_URL }}" \
+            -e REDIS_QUEUE_URL="${{ secrets.UPSTASH_REDIS_QUEUE_URL }}" \
+            $APP_IMAGE
+
+      - name: Wait for site creation
+        run: |
+          timeout 10m bash -c '
+            until docker exec site-builder test -d /home/frappe/frappe-bench/sites/x-electronics.local; do
+              echo "Waiting for site..."
+              sleep 5
+            done
+          '
+
+      - name: Stop container
+        run: docker stop site-builder
+
+      - name: Commit site image
+        run: |
+          docker commit site-builder $SITE_IMAGE
+          docker tag $SITE_IMAGE ghcr.io/trevor-gituru/warehouse-management-site:${{ github.sha }}
+
+      - name: Push site image
+        run: |
+          docker push $SITE_IMAGE
+          docker push ghcr.io/trevor-gituru/warehouse-management-site:${{ github.sha }}
+
+      - name: Cleanup
+        if: always()
+        run: |
+          docker rm -f site-builder || true
+          docker volume rm frappe-sites || true
