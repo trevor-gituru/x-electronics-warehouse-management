@@ -8,8 +8,8 @@ permissions:
   packages: write
 
 env:
-  APP_IMAGE: ghcr.io/trevor-gituru/warehouse-management:latest
-  SITE_IMAGE: ghcr.io/trevor-gituru/warehouse-management-site:latest
+  APP_IMAGE: ghcr.io/trevor-gituru/x-electronics-warehouse-management:latest
+  SITE_IMAGE: ghcr.io/trevor-gituru/x-electronics-warehouse-management:latest
 
 jobs:
   create-site-image:
