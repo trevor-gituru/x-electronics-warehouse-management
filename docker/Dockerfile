@@ -4,7 +4,7 @@ WORKDIR /home/frappe
 
 USER frappe
 
-RUN bench init frappe-bench --frappe-branch version-16 --skip-redis-config-generation --no-backups
+RUN bench init frappe-bench --frappe-branch version-15 --skip-redis-config-generation --no-backups
 
 WORKDIR /home/frappe/frappe-bench
 
