@@ -15,10 +15,11 @@ if [ ! -d "sites/$SITE_NAME" ]; then
         --db-host "$DB_HOST" \
         --db-port "$DB_PORT" \
         --db-name "$DB_NAME" \
-        --db-user "$DB_USER" \
-        --db-password "$DB_PASSWORD" \
+        --db-root-username "$DB_USER" \
+        --db-root-password "$DB_PASSWORD" \
         --no-setup-db \
-        --admin-password "$ADMIN_PASSWORD"
+        --admin-password "$ADMIN_PASSWORD" \
+        --force
 
     echo "Setting current site..."
     bench use "$SITE_NAME"
