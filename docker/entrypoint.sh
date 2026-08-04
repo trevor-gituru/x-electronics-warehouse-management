@@ -17,7 +17,6 @@ if [ ! -d "sites/$SITE_NAME" ]; then
         --db-name "$DB_NAME" \
         --db-root-username "$DB_USER" \
         --db-root-password "$DB_PASSWORD" \
-        --no-setup-db \
         --admin-password "$ADMIN_PASSWORD" \
         --force
 
